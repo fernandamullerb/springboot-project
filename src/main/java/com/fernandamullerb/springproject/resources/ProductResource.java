@@ -17,17 +17,17 @@ import com.fernandamullerb.springproject.repositories.ProductRepository;
 public class ProductResource {
 
 	@Autowired //injeção de dependência no Spring Boot (instancia o objeto ProductRepository).
-	private ProductRepository categoryRepository;
+	private ProductRepository productRepository;
 	
 	@GetMapping //resposta à requisição GET.
 	public ResponseEntity<List<Product>> findAll() { //retorna uma lista com todos os produtos.
-		List<Product> list = categoryRepository.findAll();
+		List<Product> list = productRepository.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Product> findById(@PathVariable Long id) { //retorna um produto a partir do id.
-		Product cat = categoryRepository.findById(id);
-		return ResponseEntity.ok().body(cat);
+		Product prod = productRepository.findById(id).get();
+		return ResponseEntity.ok().body(prod);
 	}	
 }

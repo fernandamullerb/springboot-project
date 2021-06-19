@@ -3,12 +3,27 @@ package com.fernandamullerb.springproject.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity //entidade gerenciada pelo JPA.
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Id //sinaliza qual será o ID no DB.
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //autoincrement.
 	private Long id;
+	
 	private String name;
 	private Double price;
+	
+	@ManyToOne //muitos produtos para uma categoria.
+	@JoinColumn(name = "category_id") //nome da chave estrangeira no DB.
 	private Category category;
 	
 	public Product() {
