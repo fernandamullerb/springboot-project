@@ -1,28 +1,25 @@
 package com.fernandamullerb.springproject.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-public class Category implements Serializable {
+public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String name;
+	private Double price;
+	private Category category;
 	
-	@JsonIgnore //evita a serialização da lista de produtos da categoria.
-	private List<Product> products = new ArrayList<>();
-	
-	public Category() {
+	public Product() {
 	}
 
-	public Category(Long id, String name) {
+	public Product(Long id, String name, Double price, Category category) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.price = price;
+		this.category = category;
 	}
 
 	public Long getId() {
@@ -41,6 +38,22 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -54,11 +67,7 @@ public class Category implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Category other = (Category) obj;
+		Product other = (Product) obj;
 		return Objects.equals(id, other.id);
-	}
-
-	public List<Product> getProducts() {
-		return products;
 	}
 }
